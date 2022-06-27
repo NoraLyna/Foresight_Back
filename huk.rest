@@ -75,3 +75,9 @@ Content-Type: application/json
 GET http://localhost:8080/reclamations-assure/state/ec
 ###
 GET http://localhost:8080/reclamations-assure/stats/state
+###
+GET http://localhost:8080/operateurs/2/op_transport
+###
+GET http://localhost:8080/operateurs/2/op_transport/stats/state
+###
+GET  http://localhost:8080/op_transport/stats/state

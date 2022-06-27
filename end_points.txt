@@ -16,6 +16,9 @@ GET /op_transport/state/:etat
     etat = en (en cours)
     etat = x (annulée)
 
+GET /op_transport/stats/state
+    Renvoi le nombre d'operation par etat (traités, non traitée ...)
+
 POST /transporter
     Créé un nouveau transporteur a partir d'un body de format
     {
@@ -41,6 +44,9 @@ GET /operateurs
 
 GET /operateurs/:id/transporteurs
     Renvoi les operateurs et les transporteurs de chacun
+
+GET /operateurs/:id/op_transport/stats/state
+    Renvoi le nombre d'operation dans chaque etat de traitement pour un operateur :id
 
 GET /assures
     Renvoi la liste des assurés

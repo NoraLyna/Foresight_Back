@@ -20,8 +20,10 @@ app.get('/', (request, response)=>{
 
 
 app.post('/op_transport', db.createOperation);
-app.get('/op_transport', db.getTransportOperationInfo);
-app.get('/op_transport/state/:etat', db.getTransportOperationInfoByState);
+app.get('/op_transport', db.getOperationInfo);
+app.get('/op_transport/state/:etat', db.getOperationInfoByState);
+app.get('/op_transport/stats/state', db.getOperationsStats);
+
 
 app.post('/transporter', db.createTransporter);
 app.get('/transporter/:id', db.getTransporterInfoById);
@@ -34,6 +36,8 @@ app.put('/demandes/:id/state/:etat', db.setDemandeState);
 
 app.get('/operateurs', db.getOperateurs);
 app.get('/operateurs/:id/transporters', db.getOperateursTransporters);
+app.get('/operateurs/:id/op_transport', db.getOperateursOperations);
+app.get('/operateurs/:id/op_transport/stats/state', db.getOperateurOperationsStats);
 
 app.post('/assures', db.createAssure);
 app.get('/assures', db.getAssures);
