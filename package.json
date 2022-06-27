@@ -2,9 +2,9 @@
   "name": "foresight_back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon api.js"
   },
   "repository": {
     "type": "git",
