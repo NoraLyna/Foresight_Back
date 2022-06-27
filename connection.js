@@ -1,23 +1,14 @@
-const {Client} = require('pg');
+const { Pool, Client } = require('pg')
 
-const client = new Client({
-    host: "localhost",
-    user: "Lyna",
-    post: 5432,
-    password: "LynaPWD",
-    database: "ForeSight_db"
+const pool = new Pool({
+  user: 'openpg',
+  host: 'localhost',
+  database: 'proj2cs',
+  password: 'openpgpwd',
+  port: 5432,
 })
 
-module.exports = client
+module.exports = {
+    pool,
+}
 
-// client.connect();
-
-// client.query(`Select * from "Assure"`,(err, res)=>{
-//     if(!err){
-//         console.log(res.rows);
-//     }
-//     else{
-//         console.log(err.message);
-//     }
-//     client.end;
-// })

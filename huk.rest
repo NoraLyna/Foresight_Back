@@ -1,0 +1,77 @@
+GET http://localhost:8080/transporter/6/op_transport
+###
+GET http://localhost:8080/transporter/8
+###
+GET http://localhost:8080/demandes
+###
+GET http://localhost:8080/transporter/6/op_transport/state/r
+###
+GET http://localhost:8080/operateurs
+###
+GET http://localhost:8080/operateurs/3/transporters
+###
+GET http://localhost:8080/assures
+###
+GET http://localhost:8080/assures/6/info
+###
+GET http://localhost:8080/assures/reclamations
+###
+GET http://localhost:8080/reclamations-assure/assure/7
+###
+GET http://localhost:8080/reclamations-assure/reclamation/1
+###
+POST http://localhost:8080/reclamations-assure
+content-type: application/json
+
+{
+    "id_assure":"7",
+    "sujet":"Froid",
+    "details":"Pas de chauffage",
+    "id_op":"2"
+}
+###
+POST http://localhost:8080/op_transport
+content-type: application/json
+
+{
+    "kilometrage_attendu":"420",
+    "transporteur_id":"6",
+    "assure_id":"3"
+}
+
+###
+POST http://localhost:8080/transporter
+Content-type: application/json
+
+{
+    "nom":"Belmont",
+    "prenom":"Richter",
+    "operateur_id":"2"
+
+}
+###
+POST http://localhost:8080/demande
+Content-Type: application/json
+
+{
+    "date_demande":"2022-08-27",
+    "assure_id":"8",
+    "operateur_id":"4"
+}
+###
+PUT http://localhost:8080/demandes/2/state/t
+###
+POST http://localhost:8080/assures
+Content-Type: application/json
+
+{
+    "nom":"Yaktoutou",
+    "prenom":"Mamba",
+    "date_naiss":"1985-06-04",
+    "num_ss":"008596625419"
+}
+
+###
+GET http://localhost:8080/reclamations-assure/state/ec
+###
+GET http://localhost:8080/reclamations-assure/stats/state

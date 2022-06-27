@@ -1,0 +1,94 @@
+GET /op_transport 
+    Renvoi toutes les operations de transport
+
+POST /op_transport
+    Crée une nouvelle operation de transport avec un body sous le format
+    {
+        "kilometrage_attendu":"420",
+        "transporteur_id":"6",
+        "assure_id":"3"
+    }
+
+GET /op_transport/state/:etat
+    Renvoi les operations de transport filtré par etat
+    etat = r (realisée)
+    etat = nr (non réalisée)
+    etat = en (en cours)
+    etat = x (annulée)
+
+POST /transporter
+    Créé un nouveau transporteur a partir d'un body de format
+    {
+        "nom":"Belmont",
+        "prenom":"Richter",
+        "operateur_id":"2"
+    }
+
+
+GET /transporter/:id
+    Renvoi les informations sur un transporteur
+
+GET /transporter/:id/op_transport
+    Renvoi toutes les operations de transports d'un transporteur
+
+GET /transporter/:id/op_transport/state/:etat
+    Renvoi les operations d'un operateurs filtré selon l'etat
+    (voir /op_transport/state/:etat)
+
+
+GET /operateurs
+    Renvoi les operateurs (just id, nom et adresse)
+
+GET /operateurs/:id/transporteurs
+    Renvoi les operateurs et les transporteurs de chacun
+
+GET /assures
+    Renvoi la liste des assurés
+
+GET /assures/:id/info
+    Renvoi les info sur un assuré selon l'id
+
+GET /reclamations-assure
+    Renvoi la liste de toutes les reclamations des assurés
+    
+POST /reclamations-assure
+    Ajouter une reclamation dont le body est sous la forme suivante
+    {
+        "id_assure":"6",
+        "sujet":"Chaleur",
+        "details":"La clim marchait pas top top",
+        "id_op":"2"
+    }
+
+GET /reclamations-assure/assure/:id
+    Renvoi la liste de toutes les reclamations de l'assuré dont l'id est :id
+
+GET /reclamations-assure/reclamation/:id
+    Renvoi les infos sur une reclamation selon son id
+
+GET /reclamations-assure/state/:etat
+    Renvoi les reclamations filtré selon un etat de traitement 
+    etat = t (traitée)
+    etat = nt (non traitée)
+    etat = ec (en cours)
+
+GET /reclamations-assure/stats/state
+    Renvoi le nombre de reclamation dans chaque etat de traitement
+    (en cours, traitées, non traitées)
+
+POST /demandes
+    Créé une demande a partir d'un body sous le format
+    {
+        "date_demande":"2022-08-27",
+        "assure_id":"8",
+        "operateur_id":"4"
+    }
+
+GET /demandes
+    Renvoi toute les demandes de transport
+
+PUT /demande/:id/state/:etat
+    Change l'etat de la demande selon :etat 
+    etat = t (traitée)
+    etat = nt (non traitée)
+    etat = ec (en cours)
