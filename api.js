@@ -8,9 +8,10 @@ const pool = client.pool;
 //GET: /op_transport
 const getOperationInfo = (request, response) => {
     var qry = 
-    `SELECT * FROM operation_transport opt, transporteurs tp, assures asr 
+    `SELECT * FROM operation_transport opt, transporteurs tp, assures asr , vehicule veh
     WHERE opt.transporteur_id = tp.id_transporteur 
     AND opt.assure_id = asr.id_assure 
+    AND veh.id_vehicule = opt.vehicule_id
     ORDER BY opt.id_operation`
     ;
     pool.query(qry, (err, res) => {
