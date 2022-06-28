@@ -88,9 +88,10 @@ const getOperationInfoByState = (request, response) => {
 const getTransporterOperations = (request, response) => {
     const id = parseInt(request.params.id);
     var qry = 
-    `SELECT * FROM  transporteurs trn, operation_transport opt, assures asr 
+    `SELECT * FROM  transporteurs trn, operation_transport opt, assures asr, vehicule veh 
     WHERE trn.id_transporteur = opt.transporteur_id 
     AND asr.id_assure = opt.assure_id 
+    AND opt.vehicule_id = veh.id_vehicule
     AND trn.id_transporteur = $1`;
 
     pool.query(qry,[id], (err, res) => {
