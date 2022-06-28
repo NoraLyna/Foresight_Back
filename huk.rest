@@ -14,7 +14,7 @@ GET http://localhost:8080/assures
 ###
 GET http://localhost:8080/assures/6/info
 ###
-GET http://localhost:8080/assures/reclamations
+GET http://localhost:8080/reclamations-assure
 ###
 GET http://localhost:8080/reclamations-assure/assure/7
 ###
@@ -34,9 +34,10 @@ POST http://localhost:8080/op_transport
 content-type: application/json
 
 {
-    "kilometrage_attendu":"420",
-    "transporteur_id":"6",
-    "assure_id":"3"
+    "kilometrage_attendu":"127",
+    "transporteur_id":"7",
+    "assure_id":"3",
+    "vehicule_id":"2"
 }
 
 ###

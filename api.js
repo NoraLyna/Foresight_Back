@@ -8,7 +8,7 @@ const pool = client.pool;
 //GET: /op_transport
 const getOperationInfo = (request, response) => {
     var qry = 
-    `SELECT * FROM operation_transport opt, transporteurs tp, assures asr , vehicule veh
+    `SELECT * FROM operation_transport opt, transporteurs tp, assures asr , vehicules veh
     WHERE opt.transporteur_id = tp.id_transporteur 
     AND opt.assure_id = asr.id_assure 
     AND veh.id_vehicule = opt.vehicule_id
@@ -25,14 +25,14 @@ const getOperationInfo = (request, response) => {
 
 //POST /op_transport
 const createOperation = (request, response) =>{
-    const {kilometrage_attendu, transporteur_id, assure_id} = request.body;
+    const {kilometrage_attendu, transporteur_id, assure_id, vehicule_id} = request.body;
 
     var qry =
     `INSERT INTO operation_transport 
-    (kilometrage_attendu, transporteur_id, assure_id) 
-    VALUES ($1, $2, $3) RETURNING *`;
+    (kilometrage_attendu, transporteur_id, assure_id, vehicule_id) 
+    VALUES ($1, $2, $3, $4) RETURNING *`;
 
-    pool.query(qry,[kilometrage_attendu, transporteur_id, assure_id], (err, res) => {
+    pool.query(qry,[kilometrage_attendu, transporteur_id, assure_id, vehicule_id], (err, res) => {
         if(err)
         {
             throw err;
@@ -89,10 +89,10 @@ const getOperationInfoByState = (request, response) => {
 const getTransporterOperations = (request, response) => {
     const id = parseInt(request.params.id);
     var qry = 
-    `SELECT * FROM  transporteurs trn, operation_transport opt, assures asr, vehicule veh 
+    `SELECT * FROM  transporteurs trn, operation_transport opt, assures asr, vehicules veh 
     WHERE trn.id_transporteur = opt.transporteur_id 
     AND asr.id_assure = opt.assure_id 
-    AND opt.vehicule_id = veh.id_vehicule
+    AND veh.id_vehicule = opt.vehicule_id
     AND trn.id_transporteur = $1`;
 
     pool.query(qry,[id], (err, res) => {
