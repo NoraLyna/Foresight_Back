@@ -1,5 +1,5 @@
 const { Pool, Client } = require('pg')
-require('dotenv').config();
+require('variables').config();
 
 /*const pool = new Pool({
   user: 'openpg',
