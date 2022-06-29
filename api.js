@@ -263,6 +263,20 @@ const getOperateurs = (request, response) =>{
     })
 }
 
+//GET /operateur/:id
+const getOperateurById = (request, response) =>{
+    const id = request.params.id;
+    var qry = 
+    `SELECT * FROM operateurs WHERE id_operateur = $1`;
+    pool.query(qry,[id], (err, res) => {
+        if(err)
+        {
+            response.status(400); response.send(err);
+        }
+        else response.status(200).json(res.rows);
+    })
+}
+
 //GET: /operateurs/by-email/:mail
 const getOperateurByEmail = (request, response) =>{
     const email = request.params.mail;
@@ -637,7 +651,7 @@ module.exports = {
     getOperationInfoByState,
     getOperationsStats,
     getMontantRemboursement,
-    
+    getOperateurById,
     createTransporter,
     getTransporterInfoById,
     getTransporterOperations,
@@ -646,6 +660,7 @@ module.exports = {
     getOperateurs,
     createOperateur,
     getOperateurByEmail,
+    
     getOperateursTransporters,
     getOperateursOperations,
     getOperateurOperationsStats,

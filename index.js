@@ -36,6 +36,7 @@ app.put('/demandes/:id/state/:etat', db.setDemandeState);
 
 app.get('/operateurs', db.getOperateurs);
 app.post('/operateurs', db.createOperateur);
+app.get('/operateurs/:id', db.getOperateurById);
 app.get('/operateurs/by-email/:mail', db.getOperateurByEmail);
 app.get('/operateurs/:id/transporters', db.getOperateursTransporters);
 app.get('/operateurs/:id/op_transport', db.getOperateursOperations);
