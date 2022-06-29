@@ -171,7 +171,8 @@ const createOperateur = (request, response) =>{
     qry = 
     `INSERT INTO operateurs
     (adresse_operateur, nom_operateur, email_operateur, pwd_operateur)
-    VALUES ($1, $2, $3, $4)`;
+    VALUES ($1, $2, $3, $4)
+    RETURNING *`;
     pool.query(qry,
         [adresse_operateur, nom_operateur, email_operateur, pwd_operateur],
         (err, res) => {
