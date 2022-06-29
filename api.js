@@ -532,6 +532,36 @@ const getReclamationsIdAssure = (request, response) =>{
 
 }
 
+//GET /reclamations-operateur
+const getReclamationsOp = (request, response) =>{
+    var qry=
+    `SELECT * FROM reclamation_op 
+    ORDER BY id_reclamation_op`;
+    pool.query(qry, (err, res) => {
+        if(err)
+        {
+            response.status(400); response.send(err);
+        }
+        response.status(200).json(res.rows);
+    })
+
+}
+
+//GET reclamation-operateur/:id
+const getReclamationsOpById = (request, response) =>{
+    const id = parseInt(request.params.id);
+    var qry=
+    `SELECT * FROM reclamation_op 
+    AND id_reclamation = $1`;
+    pool.query(qry,[id], (err, res) => {
+        if(err)
+        {
+            response.status(400); response.send(err);
+        }
+        response.status(200).json(res.rows);
+    })
+
+}
 
 //POST /demandes
 const createDemande = (request, response) =>{
@@ -621,6 +651,9 @@ module.exports = {
     getReclamationsStats,
     getReclamationsIdRec,
     getReclamationsIdAssure,
+
+    getReclamationsOp,
+    getReclamationsOpById,
 
     createAssure,
     getAssures,
