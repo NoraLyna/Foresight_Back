@@ -501,6 +501,7 @@ module.exports = {
     getTransporterOperationsByState,
 
     getOperateurs,
+    loginOperateur,
     getOperateursTransporters,
     getOperateursOperations,
     getOperateurOperationsStats,
