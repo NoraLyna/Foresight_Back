@@ -52,7 +52,7 @@ const getOperationInfo = (request, response) => {
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -70,7 +70,7 @@ const createOperation = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -86,14 +86,18 @@ const getMontantRemboursement = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        console.log(res.rows);
-        var d_parcourue = res.rows[0]['distance_parcourue'];
-        var d_operateur = res.rows[0]['dist_ass_op'];
-        var tmp_att = res.rows[0]['temps_attendu'];
-        var type_trans = res.rows[0]['type_vehicule'];
-        var mnt = CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans);
-        console.log(mnt);
-        response.status(200).json(mnt);
+        else
+        {
+            console.log(res.rows);
+            var d_parcourue = res.rows[0]['distance_parcourue'];
+            var d_operateur = res.rows[0]['dist_ass_op'];
+            var tmp_att = res.rows[0]['temps_attendu'];
+            var type_trans = res.rows[0]['type_vehicule'];
+            var mnt = CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans);
+            console.log(mnt);
+            response.status(200).json(mnt);
+
+        }
     })
     
 }
@@ -110,7 +114,7 @@ const getOperationsStats = (request, response) =>{
         {
             response.status(400)
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -137,7 +141,7 @@ const getOperationInfoByState = (request, response) => {
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -157,7 +161,7 @@ const getTransporterOperations = (request, response) => {
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -174,7 +178,7 @@ const createTransporter = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -193,7 +197,7 @@ const getTransporterInfoById = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -218,7 +222,7 @@ const getTransporterOperationsByState = (request, response) => {
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -237,7 +241,7 @@ const createOperateur = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -250,7 +254,7 @@ const getOperateurs = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -264,7 +268,7 @@ const getOperateurByEmail = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -285,7 +289,7 @@ const getOperateursOperations = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -307,7 +311,7 @@ const getOperateurOperationsStats = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -324,7 +328,7 @@ const getOperateursTransporters = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -336,7 +340,7 @@ const getAgents = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -352,7 +356,7 @@ const getAgentsById = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -368,7 +372,7 @@ const getAgentsByEmail = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -386,7 +390,7 @@ const createAssure = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 //GET: /assures
@@ -398,7 +402,7 @@ const getAssures = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -413,7 +417,7 @@ const getAssuresById = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -429,7 +433,7 @@ const getReclamations = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -446,7 +450,7 @@ const createReclamation = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -461,7 +465,7 @@ const getReclamationsStats = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -485,7 +489,7 @@ const getReclamationsByState = (request, response) => {
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 
@@ -506,7 +510,7 @@ const getReclamationsIdRec = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -527,7 +531,7 @@ const getReclamationsIdAssure = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -542,7 +546,7 @@ const getReclamationsOp = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -558,7 +562,7 @@ const getReclamationsOpById = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -576,7 +580,7 @@ const createDemande = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
@@ -588,7 +592,7 @@ const getDetailsDemande = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 
 }
@@ -612,7 +616,7 @@ const setDemandeState = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        response.status(200).json(res.rows);
+        else response.status(200).json(res.rows);
     })
 }
 
