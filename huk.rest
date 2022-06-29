@@ -104,3 +104,12 @@ Content-Type: application/json
 GET http://foresight-team09.herokuapp.com/op_transport/13/refund
 ###
 GET http://foresight-team09.herokuapp.com/reclamations-operateur/3
+###
+POST http://foresight-team09.herokuapp.com/reclamations-operateur
+Content-Type: application/json
+{
+    "operateur_id":"4",
+    "assure_id":"5",
+    "sujet":"Sujet Sujet de Reclamation",
+    "details":"Detail Details de reclamation"
+}

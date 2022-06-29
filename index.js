@@ -65,6 +65,7 @@ app.get('/reclamations-assure/assure/:id', db.getReclamationsIdAssure);
 
 app.get('/reclamations-operateur', db.getReclamationsOp);
 app.get('/reclamations-operateur/:id', db.getReclamationsOpById);
+app.post('/reclamations-operateur', db.createReclamationOp);
 
 //listening on port 8080
 app.listen(port, ()=>{

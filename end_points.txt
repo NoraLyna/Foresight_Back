@@ -97,6 +97,18 @@ GET /reclamations-assure/stats/state
     Renvoi le nombre de reclamation dans chaque etat de traitement
     (en cours, traitées, non traitées)
 
+GET /reclamations-operateur
+    renvoi toutes les reclamations operateur
+
+GET /reclamations-operateur/:id
+    renvoi la reclamation dont l'id est :id
+
+POST /reclamations-operateur
+    Créé une reclamation operateur body sous le format
+    {
+        
+    }
+
 POST /demandes
     Créé une demande a partir d'un body sous le format
     {

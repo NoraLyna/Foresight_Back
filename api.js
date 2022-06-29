@@ -556,7 +556,22 @@ const getReclamationsIdAssure = (request, response) =>{
 }
 
 //POST reclamations-operateur
-//todo
+const createReclamationOp = (request, response) => {
+    const {operateur_id, assure_id, sujet, details} = request.body;
+    var qry=
+    `INSERT INTO reclamation_op
+    (operateur_id, assure_id, sujet_reclamation_op, details_reclamation_op)
+    VALUES
+    ($1,$2,$3,$4)
+    RETURNING *`;
+    pool.query(qry,[operateur_id, assure_id, sujet, details], (err, res) => {
+        if(err)
+        {
+            response.status(400); response.send(err);
+        }
+        else response.status(200).json(res.rows);
+    })
+}
 
 
 //GET /reclamations-operateur
@@ -682,6 +697,7 @@ module.exports = {
 
     getReclamationsOp,
     getReclamationsOpById,
+    createReclamationOp,
 
     createAssure,
     getAssures,
