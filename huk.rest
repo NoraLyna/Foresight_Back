@@ -8,7 +8,7 @@ GET http://foresight-team09.herokuapp.com/transporter/6/op_transport/state/r
 ###
 GET http://foresight-team09.herokuapp.com/operateurs
 ###
-GET http://foresight-team09.herokuapp.com/operateurs/login
+POST http://foresight-team09.herokuapp.com/operateurs/login
 Content-Type: application/json
 
 {
