@@ -107,6 +107,7 @@ GET http://foresight-team09.herokuapp.com/reclamations-operateur/3
 ###
 POST http://foresight-team09.herokuapp.com/reclamations-operateur
 Content-Type: application/json
+
 {
     "operateur_id":"4",
     "assure_id":"5",
