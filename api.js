@@ -165,6 +165,23 @@ const getTransporterOperationsByState = (request, response) => {
     })
 }
 
+//POST /operateur
+const createOperateur = (request, response) =>{
+    const {adresse_operateur, nom_operateur, email_operateur, pwd_operateur} = request.body;
+    qry = 
+    `INSERT INTO operateurs
+    (adresse_operateur, nom_operateur, email_operateur, pwd_operateur)
+    VALUES ($1, $2, $3, $4)`;
+    pool.query(qry, (err, res) => {
+        if(err)
+        {
+            throw err;
+        }
+        response.status(200).json(res.rows);
+    })
+
+}
+
 //GET: /operateurs
 const getOperateurs = (request, response) =>{
     var qry = 'SELECT * FROM operateurs op';
@@ -523,6 +540,7 @@ module.exports = {
     getTransporterOperationsByState,
 
     getOperateurs,
+    createOperateur,
     getOperateurByEmail,
     getOperateursTransporters,
     getOperateursOperations,

@@ -86,3 +86,9 @@ GET http://foresight-team09.herokuapp.com/operateurs/2/op_transport/stats/state
 GET  http://foresight-team09.herokuapp.com/op_transport/stats/state
 ###
 GET http://foresight-team09.herokuapp.com/agent-cnas
+###
+GET http://foresight-team09.herokuapp.com/agent-cnas/2
+###
+GET http://foresight-team09.herokuapp.com/agent-cnas/by-email/007bond@cnas.dz
+###
+POST http://foresight-team09.herokuapp.com/operateurs
