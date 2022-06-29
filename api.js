@@ -177,6 +177,44 @@ const getOperateurs = (request, response) =>{
     })
 }
 
+//POST: /operateurs/login {email, pwd}
+const loginOperateur = (request, response) =>{
+    const {email, pwd} = request.body;
+    pool.getConnection((err, connection) => {
+        if (err) throw err;
+        console.log("connected as id " + connection.threadId);
+        connection.query(
+          `SELECT * FROM operateurs WHERE email_operateur = '?'`,
+          email,
+          (err, rows) => {
+            connection.release(); // return the connection to pool
+    
+            // user does not exists
+            if (err) {
+              throw err;
+            }
+    
+            if (!rows.length) {
+              return res.status(401).send({
+                msg: "Email incorrect!",
+              });
+            } else {
+              // wrong password
+              if (rows[0]["pwd_operateur"] != pwd) {
+                return res.status(401).send({
+                  msg: "Password is incorrect!",
+                });
+              } else {
+                console.log(rows[0].user_Id);
+                return res.status(200).send(rows[0]);
+              }
+            }
+          }
+        );
+      });
+}
+
+
 //GET /operateur/:id/op_transport
 const getOperateursOperations = (request, response) =>{
     const id = parseInt(request.params.id);

@@ -1,26 +1,26 @@
 GET http://foresight-team09.herokuapp.com/transporter/6/op_transport
 ###
-GET http://localhost:8080/transporter/8
+GET http://foresight-team09.herokuapp.com/transporter/8
 ###
-GET http://localhost:8080/demandes
+GET http://foresight-team09.herokuapp.com/demandes
 ###
-GET http://localhost:8080/transporter/6/op_transport/state/r
+GET http://foresight-team09.herokuapp.com/transporter/6/op_transport/state/r
 ###
-GET http://localhost:8080/operateurs
+GET http://foresight-team09.herokuapp.com/operateurs
 ###
-GET http://localhost:8080/operateurs/3/transporters
+GET http://foresight-team09.herokuapp.com/operateurs/3/transporters
 ###
-GET http://localhost:8080/assures
+GET http://foresight-team09.herokuapp.com/assures/
 ###
-GET http://localhost:8080/assures/6/info
+GET http://foresight-team09.herokuapp.com/assures/10/info
 ###
-GET http://localhost:8080/reclamations-assure
+GET http://foresight-team09.herokuapp.com/reclamations-assure
 ###
-GET http://localhost:8080/reclamations-assure/assure/7
+GET http://foresight-team09.herokuapp.com/reclamations-assure/assure/7
 ###
-GET http://localhost:8080/reclamations-assure/reclamation/1
+GET http://foresight-team09.herokuapp.com/reclamations-assure/reclamation/1
 ###
-POST http://localhost:8080/reclamations-assure
+POST http://foresight-team09.herokuapp.com/reclamations-assure
 content-type: application/json
 
 {
@@ -30,7 +30,7 @@ content-type: application/json
     "id_op":"2"
 }
 ###
-POST http://localhost:8080/op_transport
+POST http://foresight-team09.herokuapp.com/op_transport
 content-type: application/json
 
 {
@@ -41,7 +41,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:8080/transporter
+POST http://foresight-team09.herokuapp.com/transporter
 Content-type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-type: application/json
 
 }
 ###
-POST http://localhost:8080/demande
+POST http://foresight-team09.herokuapp.com/demande
 Content-Type: application/json
 
 {
@@ -60,25 +60,25 @@ Content-Type: application/json
     "operateur_id":"4"
 }
 ###
-PUT http://localhost:8080/demandes/2/state/t
+PUT http://foresight-team09.herokuapp.com/demandes/2/state/t
 ###
-POST http://localhost:8080/assures
+POST http://foresight-team09.herokuapp.com/assures
 Content-Type: application/json
 
 {
-    "nom":"Yaktoutou",
-    "prenom":"Mamba",
-    "date_naiss":"1985-06-04",
-    "num_ss":"008596625419"
+    "nom":"This user means",
+    "prenom":"Deploiement sucess",
+    "date_naiss":"1969-06-09",
+    "num_ss":"006666942069"
 }
 
 ###
-GET http://localhost:8080/reclamations-assure/state/ec
+GET http://foresight-team09.herokuapp.com/reclamations-assure/state/ec
 ###
-GET http://localhost:8080/reclamations-assure/stats/state
+GET http://foresight-team09.herokuapp.com/reclamations-assure/stats/state
 ###
-GET http://localhost:8080/operateurs/2/op_transport
+GET http://foresight-team09.herokuapp.com/operateurs/2/op_transport
 ###
-GET http://localhost:8080/operateurs/2/op_transport/stats/state
+GET http://foresight-team09.herokuapp.com/operateurs/2/op_transport/stats/state
 ###
-GET  http://localhost:8080/op_transport/stats/state
+GET  http://foresight-team09.herokuapp.com/op_transport/stats/state
