@@ -33,7 +33,7 @@ function CalculeRemboursement(d_parcourue, d_operateur, tmp_wait, type_trans)
 
     addi += (tmp_wait/15 * 25);
     val += addi;
-    return val;
+    return {montant:val};
 
 }
 
@@ -92,10 +92,7 @@ const getMontantRemboursement = (request, response) =>{
         var type_trans = res.rows[0]['type_vehicule'];
         var mnt = CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans);
         console.log(mnt);
-        response.status(200).json(
-            {
-                montant:mnt
-            });
+        response.status(200).json(mnt);
     })
     
 }
