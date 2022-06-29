@@ -33,6 +33,7 @@ function CalculeRemboursement(d_parcourue, d_operateur, tmp_wait, type_trans)
 
     addi += (tmp_wait/15 * 25);
     val += addi;
+    console.log(val);
     return {montant:val};
 
 }
