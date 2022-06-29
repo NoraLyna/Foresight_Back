@@ -180,7 +180,7 @@ const getOperateurs = (request, response) =>{
 //POST: /operateurs/login {email, pwd}
 const loginOperateur = (request, response) =>{
     const {email, pwd} = request.body;
-    var login_qry = 
+    var qry = 
     `SELECT * FROM operateurs WHERE email_operateur = $1`;
     pool.query(qry,[email], (err, res) => {
         if(err)
