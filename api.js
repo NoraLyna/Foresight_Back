@@ -95,7 +95,9 @@ const getMontantRemboursement = (request, response) =>{
             var tmp_att = parseFloat(res.rows[0]['temps_attente']);
             var type_trans = res.rows[0]['type_vehicule'];
             var mnt = CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans);
-            response.status(200).json(mnt);
+            //response.status(200).json(mnt);
+            response.status(200);
+            response.send(mnt);
 
         }
     })
