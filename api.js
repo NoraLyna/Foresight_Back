@@ -180,12 +180,9 @@ const getOperateurs = (request, response) =>{
 //POST: /operateurs/login {email, pwd}
 const loginOperateur = (request, response) =>{
     const {email, pwd} = request.body;
-    pool.getConnection((err, connection) => {
-        if (err) throw err;
-        console.log("connected as id " + connection.threadId);
-        connection.query(
-          `SELECT * FROM operateurs WHERE email_operateur = '?'`,
-          email,
+    pool.query(
+          `SELECT * FROM operateurs WHERE email_operateur = $1`,
+          [email],
           (err, rows) => {
             connection.release(); // return the connection to pool
     
@@ -211,8 +208,8 @@ const loginOperateur = (request, response) =>{
             }
           }
         );
-      });
 }
+
 
 
 //GET /operateur/:id/op_transport
