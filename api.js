@@ -180,34 +180,24 @@ const getOperateurs = (request, response) =>{
 //POST: /operateurs/login {email, pwd}
 const loginOperateur = (request, response) =>{
     const {email, pwd} = request.body;
-    pool.query(
-          `SELECT * FROM operateurs WHERE email_operateur = $1`,
-          [email],
-          (err, rows) => {
-            connection.release(); // return the connection to pool
-    
-            // user does not exists
-            if (err) {
-              throw err;
-            }
-    
-            if (!rows.length) {
-              return res.status(401).send({
-                msg: "Email incorrect!",
-              });
-            } else {
-              // wrong password
-              if (rows[0]["pwd_operateur"] != pwd) {
-                return res.status(401).send({
-                  msg: "Password is incorrect!",
-                });
-              } else {
-                console.log(rows[0].user_Id);
-                return res.status(200).send(rows[0]);
-              }
-            }
-          }
-        );
+    var login_qry = 
+    `SELECT * FROM operateurs WHERE email_operateur = $1`;
+    pool.query(qry,[email], (err, res) => {
+        if(err)
+        {
+            throw err;
+        }
+        if(!res.rows.length){
+            return response.status(401).json({msg:"Email incorrect"});
+        }
+        if(res.rows[0]['pwd'] != pwd)
+        {
+            return response.status(402).json({msg:"Mot de passe incorrect"});
+        }
+        response.status(200).send(rew.rows[0]);
+
+        
+    })
 }
 
 
