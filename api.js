@@ -86,6 +86,7 @@ const getMontantRemboursement = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
+        console.log(res.rows);
         var d_parcourue = res.rows[0]['distance_parcourue'];
         var d_operateur = res.rows[0]['dist_ass_op'];
         var tmp_att = res.rows[0]['temps_attendu'];
