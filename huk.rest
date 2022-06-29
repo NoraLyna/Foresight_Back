@@ -92,3 +92,11 @@ GET http://foresight-team09.herokuapp.com/agent-cnas/2
 GET http://foresight-team09.herokuapp.com/agent-cnas/by-email/007bond@cnas.dz
 ###
 POST http://foresight-team09.herokuapp.com/operateurs
+Content-Type: application/json
+
+{
+    "adresse_operateur":"El-Harrache",
+    "nom_operateur":"elharrache74",
+    "email_operateur":"elhar@cnas.dz",
+    "pwd_operateur":"0000"
+}

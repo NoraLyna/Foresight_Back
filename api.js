@@ -172,7 +172,9 @@ const createOperateur = (request, response) =>{
     `INSERT INTO operateurs
     (adresse_operateur, nom_operateur, email_operateur, pwd_operateur)
     VALUES ($1, $2, $3, $4)`;
-    pool.query(qry, (err, res) => {
+    pool.query(qry,
+        [adresse_operateur, nom_operateur, email_operateur, pwd_operateur],
+        (err, res) => {
         if(err)
         {
             throw err;
