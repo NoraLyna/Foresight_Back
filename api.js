@@ -90,9 +90,10 @@ const getMontantRemboursement = (request, response) =>{
         var d_operateur = res.rows[0]['dist_ass_op'];
         var tmp_att = res.rows[0]['temps_attendu'];
         var type_trans = res.rows[0]['type_vehicule'];
+        var mnt = CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans);
         response.status(200).json(
             {
-                montant:CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans)+""
+                montant:mnt
             });
     })
     
