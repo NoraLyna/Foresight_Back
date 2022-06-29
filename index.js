@@ -3,6 +3,11 @@ const bodyparser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 8080;
 const db = require('./api')
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*'
+}));
 
 
 
