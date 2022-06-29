@@ -8,13 +8,7 @@ GET http://foresight-team09.herokuapp.com/transporter/6/op_transport/state/r
 ###
 GET http://foresight-team09.herokuapp.com/operateurs
 ###
-POST http://foresight-team09.herokuapp.com/operateurs/login
-Content-Type: application/json
-
-{
-    "email":"bbz@cnas.dz",
-    "pwd":"0000"
-}
+GET http://foresight-team09.herokuapp.com/operateurs/by-email/bnk@cnas.dz
 ###
 GET http://foresight-team09.herokuapp.com/operateurs/3/transporters
 ###
@@ -90,3 +84,5 @@ GET http://foresight-team09.herokuapp.com/operateurs/2/op_transport
 GET http://foresight-team09.herokuapp.com/operateurs/2/op_transport/stats/state
 ###
 GET  http://foresight-team09.herokuapp.com/op_transport/stats/state
+###
+GET http://foresight-team09.herokuapp.com/agent-cnas

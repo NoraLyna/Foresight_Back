@@ -42,18 +42,26 @@ GET /transporter/:id/op_transport/state/:etat
 GET /operateurs
     Renvoi les operateurs (just id, nom et adresse)
 
-POST /operateurs/login
-    format 
-    {
-        "email":"xxxx@ffff.fe",
-        "pwd":"yuppwd",
-    }
+
+GET /operateurs/by-email/:mail
+    Renvoi l'operateur par son mail
 
 GET /operateurs/:id/transporteurs
     Renvoi les operateurs et les transporteurs de chacun
 
 GET /operateurs/:id/op_transport/stats/state
     Renvoi le nombre d'operation dans chaque etat de traitement pour un operateur :id
+
+GET /agent-cnas
+    Renvoit tout les agent cnas
+
+GET /agent-cnas/:id
+    Renvoi l'agent dont l'id est :id
+
+
+GET /agent-cnas/by-email/:mail
+    Renvoi l'agent par son email
+
 
 GET /assures
     Renvoi la liste des assurés

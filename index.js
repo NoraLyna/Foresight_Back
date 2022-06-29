@@ -40,6 +40,10 @@ app.get('/operateurs/:id/transporters', db.getOperateursTransporters);
 app.get('/operateurs/:id/op_transport', db.getOperateursOperations);
 app.get('/operateurs/:id/op_transport/stats/state', db.getOperateurOperationsStats);
 
+app.get('/agent-cnas', db.getAgents);
+app.get('/agent-cnas/:id', db.getAgentsById);
+app.get('/agent-cnas/by-email/:mail', db.getAgentsByEmail);
+
 app.post('/assures', db.createAssure);
 app.get('/assures', db.getAssures);
 app.get('/assures/:id/info', db.getAssuresById);

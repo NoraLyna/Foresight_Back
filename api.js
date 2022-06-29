@@ -251,6 +251,50 @@ const getOperateursTransporters = (request, response) =>{
     })
 }
 
+//GET agent-cnas/
+const getAgents = (request, response) =>{
+    var qry = `SELECT * FROM agent_cnas ORDER BY id_agent`;
+    pool.query(qry, (err, res) => {
+        if(err)
+        {
+            throw err;
+        }
+        response.status(200).json(res.rows);
+    })
+}
+
+//GET agent-cnass/:id
+const getAgentsById = (request, response) =>{
+    const id = request.params.id;
+    var qry = 
+    `SELECT * FROM agent_cnas 
+    WHERE id_agent = $1
+    ORDER BY id_agent`;
+    pool.query(qry,[id], (err, res) => {
+        if(err)
+        {
+            throw err;
+        }
+        response.status(200).json(res.rows);
+    })
+}
+
+//GET agent-cnas/by-email/:mail
+const getAgentsByEmail = (request, response) =>{
+    const email = request.params.mail;
+    var qry = 
+    `SELECT * FROM agent_cnas 
+    WHERE email_agent = $1
+    ORDER BY id_agent`;
+    pool.query(qry,[email], (err, res) => {
+        if(err)
+        {
+            throw err;
+        }
+        response.status(200).json(res.rows);
+    })
+}
+
 
 //POST /assure
 const createAssure = (request, response) =>{
@@ -483,6 +527,10 @@ module.exports = {
     getOperateursTransporters,
     getOperateursOperations,
     getOperateurOperationsStats,
+
+    getAgents,
+    getAgentsById,
+    getAgentsByEmail,
 
     createDemande,
     getDetailsDemande,
