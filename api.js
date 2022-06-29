@@ -5,6 +5,39 @@ const app = express();
 const pool = client.pool;
 
 
+//Calcule des prix
+function CalculeRemboursement(d_parcourue, d_operateur, tmp_wait, type_trans)
+{
+    var val = 0;
+    if(type_trans == 'ambulance_medicalisee')
+    {
+        if(d_parcourue < 100) val = 27 * d_parcourue;
+        else val = (27 * 100) + (d_parcourue - 100) * 19;
+    }
+    if(type_trans == 'ambulance_sanitaire')
+    {
+        if(d_parcourue < 100) val = 18 * d_parcourue;
+        else val = (18 * 100) + (d_parcourue - 100) * 13.5;
+    }
+    if(type_trans == 'vehicule_leger')
+    {
+        if(d_parcourue < 100) val = 12 * d_parcourue;
+        else val = (12 * 100) + (d_parcourue - 100) * 9;
+    }
+
+    var addi = 0;
+    if(d_operateur < 20 ) addi = 100;
+    if(d_operateur > 20 && d_operateur < 50) addi = 200;
+    if(d_operateur >50 && d_operateur <100) addi = 300;
+    if(d_operateur > 100) addi = (d_operateur / 100) * 150;
+
+    addi += (tmp_wait/15 * 25);
+    val += addi;
+    return val;
+
+}
+
+
 //GET: /op_transport
 const getOperationInfo = (request, response) => {
     var qry = 
@@ -17,7 +50,7 @@ const getOperationInfo = (request, response) => {
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -35,10 +68,34 @@ const createOperation = (request, response) =>{
     pool.query(qry,[kilometrage_attendu, transporteur_id, assure_id, vehicule_id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
+}
+
+//GET /op_transport/:id/remboursement
+const getMontantRemboursement = (request, response) =>{
+    const id = request.params.id;
+    var qry = 
+    `SELECT * FROM operation_transport opt, vehicules veh 
+    WHERE opt.id_operation = $1
+    AND veh.id_vehicule = opt.vehicule_id`;
+    pool.query(qry,[id], (err, res) => {
+        if(err)
+        {
+            response.status(400); response.send(err);
+        }
+        var d_parcourue = res.rows[0]['distance_parcourue'];
+        var d_operateur = res.rows[0]['dist_ass_op'];
+        var tmp_att = res.rows[0]['temps_attendu'];
+        var type_trans = res.rows[0]['type_vehicule'];
+        response.status(200).json(
+            {
+                montant:CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans)
+            });
+    })
+    
 }
 
 //GET /op_transport/stats/state
@@ -51,7 +108,7 @@ const getOperationsStats = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400)
         }
         response.status(200).json(res.rows);
     })
@@ -78,7 +135,7 @@ const getOperationInfoByState = (request, response) => {
     pool.query(qry,[etat_op], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -98,7 +155,7 @@ const getTransporterOperations = (request, response) => {
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -115,7 +172,7 @@ const createTransporter = (request, response) =>{
     pool.query(qry, [nom, prenom, operateur_id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -134,7 +191,7 @@ const getTransporterInfoById = (request, response) =>{
     pool.query(qry, [id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -159,7 +216,7 @@ const getTransporterOperationsByState = (request, response) => {
     pool.query(qry,[id, etat_op], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -178,7 +235,7 @@ const createOperateur = (request, response) =>{
         (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -191,7 +248,7 @@ const getOperateurs = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -205,7 +262,7 @@ const getOperateurByEmail = (request, response) =>{
     pool.query(qry,[email], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -226,7 +283,7 @@ const getOperateursOperations = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -248,7 +305,7 @@ const getOperateurOperationsStats = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -265,7 +322,7 @@ const getOperateursTransporters = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -277,7 +334,7 @@ const getAgents = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -293,7 +350,7 @@ const getAgentsById = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -309,7 +366,7 @@ const getAgentsByEmail = (request, response) =>{
     pool.query(qry,[email], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -327,7 +384,7 @@ const createAssure = (request, response) =>{
     pool.query(qry,[nom, prenom, date_naiss, num_ss] ,(err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -339,7 +396,7 @@ const getAssures = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -354,7 +411,7 @@ const getAssuresById = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -370,7 +427,7 @@ const getReclamations = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -387,7 +444,7 @@ const createReclamation = (request, response) =>{
     pool.query(qry, [id_assure, sujet, details, id_op],(err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -402,7 +459,7 @@ const getReclamationsStats = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -426,7 +483,7 @@ const getReclamationsByState = (request, response) => {
     pool.query(qry,[etat], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -447,7 +504,7 @@ const getReclamationsIdRec = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -468,7 +525,7 @@ const getReclamationsIdAssure = (request, response) =>{
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -487,7 +544,7 @@ const createDemande = (request, response) =>{
     pool.query(qry,[date_demande, assure_id, operateur_id], (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -499,7 +556,7 @@ const getDetailsDemande = (request, response) =>{
     pool.query(qry, (err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })
@@ -523,7 +580,7 @@ const setDemandeState = (request, response) =>{
     pool.query(qry,[etat, id] ,(err, res) => {
         if(err)
         {
-            throw err;
+            response.status(400); response.send(err);
         }
         response.status(200).json(res.rows);
     })

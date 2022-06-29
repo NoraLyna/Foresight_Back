@@ -57,9 +57,9 @@ POST http://foresight-team09.herokuapp.com/demande
 Content-Type: application/json
 
 {
-    "date_demande":"2022-08-27",
-    "assure_id":"8",
-    "operateur_id":"4"
+    "date_demande":"2022-03-27",
+    "operateur_id":"2",
+    "assure_id":"8"
 }
 ###
 PUT http://foresight-team09.herokuapp.com/demandes/2/state/t
@@ -95,8 +95,8 @@ POST http://foresight-team09.herokuapp.com/operateurs
 Content-Type: application/json
 
 {
-    "adresse_operateur":"El-Harrache",
-    "nom_operateur":"elharrache74",
-    "email_operateur":"elhar@cnas.dz",
+    "adresse_operateur":"Reghaia",
+    "nom_operateur":"Reghaia15",
+    "email_operateur":"regh@cnas.dz",
     "pwd_operateur":"0000"
 }
