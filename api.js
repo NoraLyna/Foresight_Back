@@ -92,7 +92,7 @@ const getMontantRemboursement = (request, response) =>{
         var type_trans = res.rows[0]['type_vehicule'];
         response.status(200).json(
             {
-                montant:CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans)
+                montant:CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans)+""
             });
     })
     
