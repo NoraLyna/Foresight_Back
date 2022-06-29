@@ -551,12 +551,12 @@ const getReclamationsOp = (request, response) =>{
 
 }
 
-//GET reclamation-operateur/:id
+//GET reclamations-operateur/:id
 const getReclamationsOpById = (request, response) =>{
     const id = parseInt(request.params.id);
     var qry=
-    `SELECT * FROM reclamation_op 
-    AND id_reclamation_op = $1`;
+        `SELECT * FROM reclamation_op 
+        WHERE id_reclamation_op = $1`;
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
