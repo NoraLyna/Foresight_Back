@@ -188,13 +188,13 @@ const loginOperateur = (request, response) =>{
             throw err;
         }
         if(!res.rows.length){
-            return response.status(401).json({msg:"Email incorrect"});
+            response.status(401).json({msg:"Email incorrect"});
         }
-        if(res.rows[0]['pwd_operateur'] != pwd)
+        else if(res.rows[0]['pwd_operateur'] != pwd)
         {
-            return response.status(402).json({msg:"Mot de passe incorrect"});
+            response.status(402).json({msg:"Mot de passe incorrect"});
         }
-        response.status(200).send(rew.rows[0]);
+        else response.status(200).send(rew.rows[0]);
 
         
     })
