@@ -254,7 +254,12 @@ const getOperateurs = (request, response) =>{
         {
             response.status(400); response.send(err);
         }
-        else response.status(200).json(res.rows);
+        else
+        {
+            //response.status(200).json(res.rows);
+            response.send(res.rows);
+            //console.log('')
+        }
     })
 }
 
@@ -535,6 +540,10 @@ const getReclamationsIdAssure = (request, response) =>{
     })
 
 }
+
+//POST reclamations-operateur
+//todo
+
 
 //GET /reclamations-operateur
 const getReclamationsOp = (request, response) =>{
