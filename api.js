@@ -177,9 +177,9 @@ const getOperateurs = (request, response) =>{
     })
 }
 
-//POST: /operateurs/login {email, pwd}
-const loginOperateur = (request, response) =>{
-    const {email, pwd} = request.body;
+//GET: /operateurs/by-email/:mail
+const getOperateurByEmail = (request, response) =>{
+    const email = request.params.mail;
     var qry = 
     `SELECT * FROM operateurs WHERE email_operateur = $1`;
     pool.query(qry,[email], (err, res) => {
@@ -187,16 +187,7 @@ const loginOperateur = (request, response) =>{
         {
             throw err;
         }
-        if(!res.rows.length){
-            response.status(401).json({msg:"Email incorrect"});
-        }
-        else if(res.rows[0]['pwd_operateur'] != pwd)
-        {
-            response.status(402).json({msg:"Mot de passe incorrect"});
-        }
-        else response.status(200).send(rew.rows[0]);
-
-        
+        response.status(200).json(res.rows);
     })
 }
 
@@ -488,7 +479,7 @@ module.exports = {
     getTransporterOperationsByState,
 
     getOperateurs,
-    loginOperateur,
+    getOperateurByEmail,
     getOperateursTransporters,
     getOperateursOperations,
     getOperateurOperationsStats,

@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
     "email":"bbz@cnas.dz",
-    "pwd":"7878787"
+    "pwd":"0000"
 }
 ###
 GET http://foresight-team09.herokuapp.com/operateurs/3/transporters
