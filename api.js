@@ -552,7 +552,7 @@ const getReclamationsOpById = (request, response) =>{
     const id = parseInt(request.params.id);
     var qry=
     `SELECT * FROM reclamation_op 
-    AND id_reclamation = $1`;
+    AND id_reclamation_op = $1`;
     pool.query(qry,[id], (err, res) => {
         if(err)
         {
