@@ -74,7 +74,7 @@ const createOperation = (request, response) =>{
     })
 }
 
-//GET /op_transport/:id/remboursement
+//GET /op_transport/:id/refund
 const getMontantRemboursement = (request, response) =>{
     const id = request.params.id;
     var qry = 
@@ -593,6 +593,7 @@ module.exports = {
     createOperation,
     getOperationInfoByState,
     getOperationsStats,
+    getMontantRemboursement,
     
     createTransporter,
     getTransporterInfoById,

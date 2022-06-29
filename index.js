@@ -23,7 +23,7 @@ app.post('/op_transport', db.createOperation);
 app.get('/op_transport', db.getOperationInfo);
 app.get('/op_transport/state/:etat', db.getOperationInfoByState);
 app.get('/op_transport/stats/state', db.getOperationsStats);
-
+app.get('/op_transport/:id/refund', db.getMontantRemboursement);
 
 app.post('/transporter', db.createTransporter);
 app.get('/transporter/:id', db.getTransporterInfoById);
