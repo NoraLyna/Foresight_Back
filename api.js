@@ -92,7 +92,7 @@ const getMontantRemboursement = (request, response) =>{
             console.log(res.rows);
             var d_parcourue = parseFloat(res.rows[0]['distance_realise']);
             var d_operateur = parseFloat(res.rows[0]['dist_ass_op']);
-            var tmp_att = parseFloat(res.rows[0]['temps_attendu']);
+            var tmp_att = parseFloat(res.rows[0]['temps_attente']);
             var type_trans = res.rows[0]['type_vehicule'];
             var mnt = CalculeRemboursement(d_parcourue, d_operateur, tmp_att, type_trans);
             response.status(200).json(mnt);
