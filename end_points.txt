@@ -42,6 +42,13 @@ GET /transporter/:id/op_transport/state/:etat
 GET /operateurs
     Renvoi les operateurs (just id, nom et adresse)
 
+POST /operateurs/login
+    format 
+    {
+        "email":"xxxx@ffff.fe",
+        "pwd":"yuppwd",
+    }
+
 GET /operateurs/:id/transporteurs
     Renvoi les operateurs et les transporteurs de chacun
 
